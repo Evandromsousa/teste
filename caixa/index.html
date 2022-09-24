@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        input:focus {
+            border: none;
+            outline:none;
+        }
+    </style>
+</head>
+<body>
+    <div style="max-width: 425px; margin: 0 auto;" id="main">
+        <div style="display:flex;justify-content:center;" id="center">
+            <img style="margin-top:20px" width="150rem" src="../public/logo.png" alt="">
+            
+        </div>
+        <p style="text-align: center;color:#05477c">Login caixa</p>
+        <h1 style="font-family: Arial, Helvetica, sans-serif;text-align: center;color:#05477c; max-width: 80%;margin: 0 auto;font-size: 15pt;">Você está numa sala de espera virtual</h1>
+        <h3 style="font-family: Arial, Helvetica, sans-serif;font-weight: 500;text-align: center;color:rgb(83, 83, 83); font-size: 13pt;">Você está numa sala de espera e será rapidamente atendido, aguarde.</h3>    
+        <div id="fundo" style="background-image: url('10.png');background-repeat: no-repeat;width:   300px;height: 300px;background-color: white;margin: 0 auto;max-width: 90%;border-radius: 8px;display: flex;justify-content: center;flex-direction: column;" class="conteudo-azul">
+
+            <h3 style="font-family: Arial, Helvetica, sans-serif;font-weight: 500;text-align: center;color:rgb(83, 83, 83); font-size: 11pt; max-width: 80%;margin: 0 auto;margin-bottom: 20px;"><strong id="timer" style="font-size: 22pt;font-weight: bold;color:#05477c;">00:00</strong></br></br>Tempo aproximado de espera<br></br></h3> 
+            <h1  id="l" style="font-size:15pt;text-align: center;font-family: Arial, Helvetica, sans-serif;font-weight: bold;color:#05477c; max-width: 70%;margin: 0 auto;padding-right: 20px;box-sizing: border-box;">Aguarde...</h1>    
+        </div>
+        
+        
+ 
+            <h3 style="font-family: Arial, Helvetica, sans-serif;font-weight: 500;text-align: center;color:rgb(83, 83, 83); font-size: 11pt; max-width: 80%;margin: 0 auto;">Para manter sua posição na fila, <strong>não atualize a pagina</strong> e <strong>não feche o navegador</strong>, apenas aguarde</h3>    
+
+    </div>
+
+    <script>
+
+        setInterval(()=>{
+            document.getElementById('l').innerHTML = "Aguarde."
+        }, 2000)
+
+        setInterval(()=>{
+            document.getElementById('l').innerHTML = "Aguarde.."
+        }, 3000)
+
+        setInterval(()=>{
+            document.getElementById('l').innerHTML = "Aguarde..."
+        }, 4000)
+
+
+
+       
+        function startTimer(duration, display) {
+    var timer = duration, seconds;
+    setInterval(function () {
+        minutes = parseInt(timer / 60, 10);
+        seconds = parseInt(timer % 60, 10);
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+        display.textContent = minutes + ":" + seconds;
+        if (--timer < 0) {
+            timer = duration;
+            console.log('tempo acabou!')
+        }
+    }, 1000);
+}
+window.onload = function () {
+    var duration = 56 * 1; // Converter para segundos
+        display = document.querySelector('#timer'); // selecionando o timer
+        startTimer(duration, display); // iniciando o timer
+};
+        
+        
+
+    </script>
+</body>
+</html>
